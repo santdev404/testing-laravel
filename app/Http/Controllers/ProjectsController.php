@@ -24,6 +24,10 @@ class ProjectsController extends Controller
 
     }
 
+    public function create(){
+        return view('projects.create');
+    }
+
     public function show(Project $project){
 
         if(auth()->user()->isNot($project->owner)){
