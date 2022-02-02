@@ -26,6 +26,11 @@
 
                 <div>
                     {{-- task --}}
+                    @foreach ($project->tasks as $task)
+                        <div class="card mb-3">{{$task->body}}</div>
+                    @endforeach
+
+
                     <h2 class="text-lg text-grey font-normal mb-3">General Notes</h2>
                     {{-- general notes --}}
                     <textarea class="card w-full" style="min-height: 200px">Lorem ipsum</textarea>
