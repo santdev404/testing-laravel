@@ -27,20 +27,24 @@ class ManageProjectsTest extends TestCase
     /** @test */
     public function a_user_can_create_a_project(){
 
+        $this->withoutExceptionHandling();
+
         $this->signIn();
+        //$this->be(factory('App\User')->create());
 
         $this->get('/projects/create')->assertStatus(200);
 
+
         $attributes = [
-            'title' => $this->faker->sentence(4),
-            'description' => $this->faker->sentence(4)
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->paragraph
         ];
 
-        $this->post('/projects',$attributes)->assertRedirect('/projects');
+        $this->post('/projects', $attributes)->assertRedirect(('/projects'));
 
         $this->assertDatabaseHas('projects', $attributes);
 
-        $this->get('/projects')->assertSee($attributes['title'])->assertSee($attributes['description']);
+        $this->get('/projects')->assertSee($attributes['title']);
 
     } 
 
