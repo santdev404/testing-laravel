@@ -55,17 +55,11 @@ class ProjectTaskTest extends TestCase
     /** @test */
     public function a_task_can_be_updated(){
 
-
-
         $project = app(ProjectFactory::class)
-                    ->ownedBy($this->signIn())
                     ->withTask(1)
                     ->create();
 
-
-
-
-        $this->patch($project->tasks[0]->path(),[
+        $this->actingAs($project->owner)->patch($project->tasks->first()->path(),[
             'body'=> 'changed',
             'completed' => true
         ]);
