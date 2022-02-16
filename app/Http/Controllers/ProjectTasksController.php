@@ -28,22 +28,20 @@ class ProjectTasksController extends Controller
 
         $this->authorize('update', $task->project);
 
-        // if(auth()->user()->isNot($project->owner)){
-        //     abort(403);
+        $task->update(request()->validate(['body' => 'required']));
+
+        // if(request('completed')){
+        //     $task->complete();
+        // }else{
+        //     $task->incomplete();
         // }
 
-        request()->validate(['body' => 'required']);
 
-        $task->update(['body'=> request('body')]);
+        // $method = request('completed')? 'complete' : 'incomplete';
 
-        if(request()->has('completed')){
-            $task->complete();
-        }
+        request('completed') ? $task->complete() : $task->incomplete();
 
-        // $task->update([
-        //     'body' => request('body'),
-        //     'completed' => request()->has('completed')
-        // ]);
+        //$task->$method();
 
         return redirect($project->path());
 
