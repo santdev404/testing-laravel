@@ -1,1 +1,1 @@
-You updated a project
+{{ $activity->user->name}} updated a project

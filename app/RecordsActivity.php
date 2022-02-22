@@ -26,10 +26,9 @@ trait RecordsActivity
                 });
             }
         }
-
-
-
     }
+
+
 
     protected function activityDescription($description){
     
@@ -50,6 +49,7 @@ trait RecordsActivity
     public function recordActivity($description){
 
         return  $this->activity()->create([
+            'user_id' => ($this->project ?? $this)->owner->id,
             'description' => $description,
             'project_id' => class_basename($this) === 'Project' ? $this->id : $this->project_id,
             'changes' => $this->activityChanges(),
