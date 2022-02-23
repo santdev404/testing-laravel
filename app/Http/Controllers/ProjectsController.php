@@ -12,8 +12,7 @@ class ProjectsController extends Controller
 {
     public function index(){
 
-        // $projects = Project::all();
-        $projects = auth()->user()->projects;
+        $projects = auth()->user()->accesibleProjects();
 
         return view('projects.index', compact('projects'));
     }
@@ -45,12 +44,6 @@ class ProjectsController extends Controller
 
     }
 
-    // public function update(UpdateProjectRequest $request){
-
-        // $project->update($request->validated());
-        // $request->save();
-
-        //return redirect($request->save()->path());
 
     public function update(Project $project){
         $this->authorize('update', $project);
